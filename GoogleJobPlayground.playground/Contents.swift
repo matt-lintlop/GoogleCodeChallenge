@@ -51,10 +51,19 @@ class StringRotator {
         guard inputString.count == rotateToString.count else {
             return false
         }
-        let firstCharRotateCount:UInt8 = 1
-        for inputChar in inputString {
-            if inputChar != getCharacter(inputChar, rotatedBy: firstCharRotateCount) {
-                return false
+        let stringLength = inputString.count
+        var firstCharRotateCount:Int8?
+        for index in 0..<stringLength {
+            let inputStringChar:Int8 = inputString.utf8CString[index]
+            let rotateStringChar:Int8 = rotateToString.utf8CString[index]
+            let charRotateCount:Int8 = rotateStringChar - inputStringChar
+            if firstCharRotateCount == nil {
+                 firstCharRotateCount = charRotateCount
+            }
+            else {
+                if charRotateCount != firstCharRotateCount {
+                    return false
+                }
             }
         }
         return true
