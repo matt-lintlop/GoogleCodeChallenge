@@ -2,22 +2,44 @@ import Cocoa
 
 var str = "Hello, Google Job for Matt"
 let correctResultStrings = [["abbc","cdde","zaab"],["cat","bzs"]]
-var resultStrings:[[String]]?
 
 class StringRotator {
     
     var inputStringLeft: [String]?
-    
+    var resultStrings:[[String]]?
+
     init() {
         self.inputStringLeft = nil
-    }
-    func findCommonRotatedStrings(withInput strings:[String]) -> [[String]]? {
+        self.resultStrings = nil
+   }
+    func findCommonRotatedStrings(withStrings strings:[String]) -> [[String]]? {
         self.inputStringLeft = strings
-        return nil
+        self.resultStrings = nil
+
+        for string in strings {
+            
+        }
+        return self.resultStrings
     }
     
     func getCharacter(_ char:Character, rotatedBy rotateCount:Int) -> Character {
+        var charAlpahetIndex = characterAlphabetIndex(char)
         return char
+    }
+    
+    func characterAlphabetIndex(_ char:Character) -> UInt8? {
+        guard char.isASCII else {
+            return nil
+        }
+        let charAscii = char.asciiValue!
+        let upperCaseA:UInt8 = Character("A").asciiValue!
+        let lowerCaseA:UInt8 = Character("a").asciiValue!
+        if charAscii >= upperCaseA {
+            return charAscii - upperCaseA
+        }
+        else {
+            return charAscii - lowerCaseA
+        }
     }
     
     func doesString(_ inputString:String, rotateTo rotateToString:String) -> Bool {
@@ -39,7 +61,7 @@ let inputStrings = ["abbc","cdde","zaab","cat","thfg","ed","bzs"]
 
 print("Input Strings: \(inputStrings)")
 
-if let resultStrings = stringRotator.findCommonRotatedStrings(withInput:inputStrings) {
+if let resultStrings = stringRotator.findCommonRotatedStrings(withStrings:inputStrings) {
     print("Result has \(resultStrings.count) strings : \(resultStrings)")
 }
 else {
