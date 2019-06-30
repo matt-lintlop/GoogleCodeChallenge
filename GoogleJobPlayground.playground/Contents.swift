@@ -20,7 +20,7 @@ class StringRotator {
         self.inputStringLeft = inputStrings
         var commonStrings:[String] = [firstString]
 
-        for index in 1..<firstString.count {
+        for index in 1..<inputStrings.count {
             let inputString = inputStrings[index]
             if doesString(firstString, rotateTo:inputString) {
                 commonStrings.append(inputString)
@@ -87,8 +87,8 @@ class StringRotator {
 }
 
 let stringRotator = StringRotator()
-let inputStrings = ["abbc","cdde","zaab","cat","thfg","ed","bzs"]
-
+// let inputStrings = ["abbc","cdde","zaab","cat","thfg","ed","bzs"]
+let inputStrings = ["abbc","zaab"]
 print("Input Strings: \(inputStrings)")
 
 if let resultStrings = stringRotator.findCommonRotatedStrings(withStrings:inputStrings) {
