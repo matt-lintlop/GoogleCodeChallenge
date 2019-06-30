@@ -16,6 +16,10 @@ class StringRotator {
         self.inputStringLeft = strings
         return nil
     }
+    
+    func getCharacter(_ char:String, rotatedBy rotateCount:Int) -> String {
+        return char
+    }
 }
 
 let stringRotator = StringRotator()
