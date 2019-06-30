@@ -17,8 +17,21 @@ class StringRotator {
         return nil
     }
     
-    func getCharacter(_ char:String, rotatedBy rotateCount:Int) -> String {
+    func getCharacter(_ char:Character, rotatedBy rotateCount:Int) -> Character {
         return char
+    }
+    
+    func doesString(_ inputString:String, rotateTo rotateToString:String) -> Bool {
+        guard inputString.count == rotateToString.count else {
+            return false
+        }
+        let firstCharRotateCount = 1
+        for inputChar in inputString {
+            if inputChar != getCharacter(inputChar, rotatedBy: firstCharRotateCount) {
+                return false
+            }
+        }
+        return true
     }
 }
 
