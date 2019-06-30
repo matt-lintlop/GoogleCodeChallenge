@@ -1,7 +1,6 @@
 import Cocoa
 
 var str = "Hello, Google Job for Matt"
-var inputStrings:[String]?
 let correctResultStrings = [["abbc","cdde","zaab"],["cat","bzs"]]
 var resultStrings:[[String]]?
 
@@ -36,7 +35,11 @@ class StringRotator {
 }
 
 let stringRotator = StringRotator()
-if let resultStrings = stringRotator.findCommonRotatedStrings(withInput:["abbc","cdde","zaab","cat","thfg","ed","bzs"]) {
+let inputStrings = ["abbc","cdde","zaab","cat","thfg","ed","bzs"]
+
+print("Input Strings: \(inputStrings)")
+
+if let resultStrings = stringRotator.findCommonRotatedStrings(withInput:inputStrings) {
     print("Result has \(resultStrings.count) strings : \(resultStrings)")
 }
 else {
