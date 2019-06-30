@@ -34,11 +34,15 @@ class StringRotator {
         return nil
     }
 
-    func getCharacter(_ char:Character, rotatedBy rotateCount:UInt8) -> Character? {
+    func getCharacter(_ char:Character, rotatedBy count:Int8) -> Character? {
         guard let charAlpahetIndex = characterAlphabetIndex(char) else {
             return nil
         }
-        let rotatedCharAlpabetIndex = (charAlpahetIndex + rotateCount) % UInt8(26)
+        var rotateCount = count
+        repeat {
+            rotateCount += 26
+        } while rotateCount < 0
+        let rotatedCharAlpabetIndex = (charAlpahetIndex + UInt8(rotateCount)) % UInt8(26)
         let rotatedChar:Character = Character(UnicodeScalar(char.asciiValue! + rotatedCharAlpabetIndex))
         return rotatedChar
     }
