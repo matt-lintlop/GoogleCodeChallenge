@@ -12,16 +12,28 @@ class StringRotator {
         self.inputStringLeft = nil
         self.resultStrings = nil
    }
-    func findCommonRotatedStrings(withStrings strings:[String]) -> [[String]]? {
-        self.inputStringLeft = strings
-        self.resultStrings = nil
-
-        for string in strings {
-            
+    func findCommonRotatedStrings(withStrings inputStrings:[String]) -> [String]? {
+        guard inputStrings.count >= 2 else {
+            return inputStrings
         }
-        return self.resultStrings
+        let firstString = inputStrings.first!
+        self.inputStringLeft = inputStrings
+        var commonStrings:[String] = [firstString]
+
+        for index in 1..<firstString.count {
+            let inputString = inputStrings[index]
+            if doesString(firstString, rotateTo:inputString) {
+                commonStrings.append(inputString)
+            }
+        }
+        return commonStrings
     }
     
+    func findAllCommonRotatedStrings(withStrings inputStrings:[String]) -> [[String]]? {
+        // TODO
+        return nil
+    }
+
     func getCharacter(_ char:Character, rotatedBy rotateCount:UInt8) -> Character? {
         guard let charAlpahetIndex = characterAlphabetIndex(char) else {
             return nil
