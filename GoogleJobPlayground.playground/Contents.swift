@@ -22,11 +22,16 @@ class StringRotator {
         return self.resultStrings
     }
     
-    func getCharacter(_ char:Character, rotatedBy rotateCount:Int) -> Character {
-        var charAlpahetIndex = characterAlphabetIndex(char)
-        return char
+    func getCharacter(_ char:Character, rotatedBy rotateCount:UInt8) -> Character? {
+        guard let charAlpahetIndex = characterAlphabetIndex(char) else {
+            return nil
+        }
+        let rotatedCharAlpabetIndex = (charAlpahetIndex + rotateCount) % UInt8(26)
+        let rotatedChar:Character = Character(UnicodeScalar(char.asciiValue! + rotatedCharAlpabetIndex))
+        return rotatedChar
     }
     
+    // Get a letter's index into the alphabet (0-25)
     func characterAlphabetIndex(_ char:Character) -> UInt8? {
         guard char.isASCII else {
             return nil
@@ -46,7 +51,7 @@ class StringRotator {
         guard inputString.count == rotateToString.count else {
             return false
         }
-        let firstCharRotateCount = 1
+        let firstCharRotateCount:UInt8 = 1
         for inputChar in inputString {
             if inputChar != getCharacter(inputChar, rotatedBy: firstCharRotateCount) {
                 return false
