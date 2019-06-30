@@ -39,9 +39,9 @@ class StringRotator {
             return nil
         }
         var rotateCount = count
-        repeat {
+        while rotateCount < 0 {
             rotateCount += 26
-        } while rotateCount < 0
+        }
         let rotatedCharAlpabetIndex = (charAlpahetIndex + UInt8(rotateCount)) % UInt8(26)
         let rotatedChar:Character = Character(UnicodeScalar(char.asciiValue! + rotatedCharAlpabetIndex))
         return rotatedChar
@@ -72,7 +72,13 @@ class StringRotator {
         for index in 0..<stringLength {
             let inputStringChar:Int8 = inputString.utf8CString[index]
             let rotateStringChar:Int8 = rotateToString.utf8CString[index]
-            let charRotateCount:Int8 = rotateStringChar - inputStringChar
+            var charRotateCount:Int8 = rotateStringChar - inputStringChar
+            while charRotateCount < 0 {
+                charRotateCount += 26
+            }
+            while charRotateCount > 25 {
+                charRotateCount -= 26
+            }
             if firstCharRotateCount == nil {
                  firstCharRotateCount = charRotateCount
             }
@@ -87,8 +93,7 @@ class StringRotator {
 }
 
 let stringRotator = StringRotator()
-// let inputStrings = ["abbc","cdde","zaab","cat","thfg","ed","bzs"]
-let inputStrings = ["abbc","zaab"]
+let inputStrings = ["abbc","cdde","zaab","cat","thfg","ed","bzs"]
 print("Input Strings: \(inputStrings)")
 
 if let resultStrings = stringRotator.findCommonRotatedStrings(withStrings:inputStrings) {
