@@ -5,19 +5,14 @@ let correctResultStrings = [["abbc","cdde","zaab"],["cat","bzs"]]
 
 class StringRotator {
     
-    var inputStringLeft: [String]?
-    var resultStrings:[[String]]?
-
     init() {
-        self.inputStringLeft = nil
-        self.resultStrings = nil
    }
     func findCommonRotatedStrings(withStrings inputStrings:[String]) -> [String]? {
+        print("findCommonRotatedStrings: inputStrings  \(inputStrings)")
         guard inputStrings.count >= 2 else {
             return inputStrings
         }
         let firstString = inputStrings.first!
-        self.inputStringLeft = inputStrings
         var commonStrings:[String] = [firstString]
 
         for index in 1..<inputStrings.count {
@@ -30,8 +25,30 @@ class StringRotator {
     }
     
     func findAllCommonRotatedStrings(withStrings inputStrings:[String]) -> [[String]]? {
-        // TODO
-        return nil
+        print("findAllCommonRotatedStrings")
+        var resultStrings:[[String]]?
+        var remainingStrings:[String]? = inputStrings
+        var commonRotatedStrings: [String]?
+        while (remainingStrings != nil) && remainingStrings!.count >= 1 {
+            if let commonRotatedStrings = findCommonRotatedStrings(withStrings: remainingStrings!) {
+                print("Result commonRotatedStrings = \(commonRotatedStrings)")
+                resultStrings?.append(commonRotatedStrings)
+                for commonRotatedString in commonRotatedStrings {
+                    if let index = remainingStrings?.firstIndex(of: commonRotatedString) {
+                        remainingStrings?.remove(at: index)
+                    }
+                }
+            }
+        }
+   
+        if resultStrings != nil {
+            print("Result has \(resultStrings!.count) strings : \(resultStrings!)")
+        }
+        else {
+            print("Result is nil")
+        }
+
+        return resultStrings
     }
 
     func getCharacter(_ char:Character, rotatedBy count:Int8) -> Character? {
@@ -96,7 +113,7 @@ let stringRotator = StringRotator()
 let inputStrings = ["abbc","cdde","zaab","cat","thfg","ed","bzs"]
 print("Input Strings: \(inputStrings)")
 
-if let resultStrings = stringRotator.findCommonRotatedStrings(withStrings:inputStrings) {
+if let resultStrings = stringRotator.findAllCommonRotatedStrings(withStrings:inputStrings) {
     print("Result has \(resultStrings.count) strings : \(resultStrings)")
 }
 else {
