@@ -8,7 +8,6 @@ class StringRotator {
     init() {
    }
     func findCommonRotatedStrings(withStrings inputStrings:[String]) -> [String]? {
-        print("findCommonRotatedStrings: inputStrings  \(inputStrings)")
         guard inputStrings.count >= 2 else {
             return inputStrings
         }
@@ -25,14 +24,17 @@ class StringRotator {
     }
     
     func findAllCommonRotatedStrings(withStrings inputStrings:[String]) -> [[String]]? {
-        print("findAllCommonRotatedStrings")
         var resultStrings:[[String]]?
         var remainingStrings:[String]? = inputStrings
         var commonRotatedStrings: [String]?
         while (remainingStrings != nil) && remainingStrings!.count >= 1 {
             if let commonRotatedStrings = findCommonRotatedStrings(withStrings: remainingStrings!) {
-                print("Result commonRotatedStrings = \(commonRotatedStrings)")
-                resultStrings?.append(commonRotatedStrings)
+                if commonRotatedStrings.count >= 1 {
+                    if resultStrings == nil {
+                        resultStrings = []
+                    }
+                    resultStrings?.append(commonRotatedStrings)
+                }
                 for commonRotatedString in commonRotatedStrings {
                     if let index = remainingStrings?.firstIndex(of: commonRotatedString) {
                         remainingStrings?.remove(at: index)
@@ -40,14 +42,6 @@ class StringRotator {
                 }
             }
         }
-   
-        if resultStrings != nil {
-            print("Result has \(resultStrings!.count) strings : \(resultStrings!)")
-        }
-        else {
-            print("Result is nil")
-        }
-
         return resultStrings
     }
 
