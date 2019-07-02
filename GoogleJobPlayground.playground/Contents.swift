@@ -53,9 +53,7 @@ class StringRotator {
         }
         var firstCharRotateCount:Int8?
         for index in 0..<string1.count {
-            let inputStringChar:Int8 = string1.utf8CString[index]
-            let rotateStringChar:Int8 = string2.utf8CString[index]
-            var charRotateCount:Int8 = rotateStringChar - inputStringChar
+            var charRotateCount:Int8 = string2.utf8CString[index] - string1.utf8CString[index]
             while charRotateCount < 0 {
                 charRotateCount += 26
             }
