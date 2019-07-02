@@ -5,9 +5,6 @@ let correctResultStrings = [["abbc","cdde","zaab"],["cat","bzs"]]
 
 class StringRotator {
     
-    init() {
-    }
-    
     // Find the first common rotated strings in a list of input strings .
     // Returns an array of common strings.
     func findFirstCommonRotatedStrings(withStrings inputStrings:[String]) -> [String]? {
