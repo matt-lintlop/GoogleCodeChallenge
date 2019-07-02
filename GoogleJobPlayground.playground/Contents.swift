@@ -45,15 +45,15 @@ class StringRotator {
         return resultStrings
     }
     
-    func canRotateString(_ inputString:String, toString rotateToString:String) -> Bool {
-        guard inputString.count == rotateToString.count else {
+    func canRotateString(_ string1:String, toString string2:String) -> Bool {
+        guard string1.count == string2.count else {
             return false
         }
-        let stringLength = inputString.count
+        let stringLength = string1.count
         var firstCharRotateCount:Int8?
         for index in 0..<stringLength {
-            let inputStringChar:Int8 = inputString.utf8CString[index]
-            let rotateStringChar:Int8 = rotateToString.utf8CString[index]
+            let inputStringChar:Int8 = string1.utf8CString[index]
+            let rotateStringChar:Int8 = string2.utf8CString[index]
             var charRotateCount:Int8 = rotateStringChar - inputStringChar
             while charRotateCount < 0 {
                 charRotateCount += 26
