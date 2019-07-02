@@ -6,8 +6,11 @@ let correctResultStrings = [["abbc","cdde","zaab"],["cat","bzs"]]
 class StringRotator {
     
     init() {
-   }
-    func findCommonRotatedStrings(withStrings inputStrings:[String]) -> [String]? {
+    }
+    
+    // Find the first common rotated strings in a list of input strings .
+    // Returns an array of common strings.
+    func findFirstCommonRotatedStrings(withStrings inputStrings:[String]) -> [String]? {
         guard inputStrings.count >= 2 else {
             return inputStrings
         }
@@ -28,7 +31,7 @@ class StringRotator {
         var remainingStrings:[String]? = inputStrings
         while (remainingStrings!.count >= 1) {
             // find all common strings in the remaining strings
-            if let commonRotatedStrings = findCommonRotatedStrings(withStrings: remainingStrings!) {
+            if let commonRotatedStrings = findFirstCommonRotatedStrings(withStrings: remainingStrings!) {
                 if commonRotatedStrings.count >= 2 {
                     if resultStrings == nil {
                         resultStrings = []
@@ -46,6 +49,7 @@ class StringRotator {
         return resultStrings
     }
     
+    // Determine if string #1 can be rotated to strimg #2
     func canRotateString(_ string1:String, toString string2:String) -> Bool {
         guard string1.count == string2.count else {
             return false
