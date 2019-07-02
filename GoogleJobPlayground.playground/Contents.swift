@@ -40,12 +40,13 @@ class StringRotator {
         var resultStrings:[[String]]?
         var remainingStrings:[String]? = inputStrings
         
-        // keep looping while the are at least 2 strings remaining
-        while (remainingStrings!.count >= 1) {
+        // keep looping while the are at least the minuimum # of strings remaining
+        let kMinCommonStringsCount = 2
+        while (remainingStrings!.count >= kMinCommonStringsCount) {
             
             // find the first list of common strings from the remaining strings
             if let commonRotatedStrings = findFirstCommonRotatedStrings(withStrings: remainingStrings!) {
-                if commonRotatedStrings.count >= 1 {
+                if commonRotatedStrings.count >= kMinCommonStringsCount {
                     if resultStrings == nil {
                         
                         // initialize the result strings
