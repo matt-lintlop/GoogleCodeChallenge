@@ -44,36 +44,7 @@ class StringRotator {
         }
         return resultStrings
     }
-
-    func getCharacter(_ char:Character, rotatedBy count:Int8) -> Character? {
-        guard let charAlpahetIndex = characterAlphabetIndex(char) else {
-            return nil
-        }
-        var rotateCount = count
-        while rotateCount < 0 {
-            rotateCount += 26
-        }
-        let rotatedCharAlpabetIndex = (charAlpahetIndex + UInt8(rotateCount)) % UInt8(26)
-        let rotatedChar:Character = Character(UnicodeScalar(char.asciiValue! + rotatedCharAlpabetIndex))
-        return rotatedChar
-    }
-    
-    // Get a letter's index into the alphabet (0-25)
-    func characterAlphabetIndex(_ char:Character) -> UInt8? {
-        guard char.isASCII else {
-            return nil
-        }
-        let charAscii = char.asciiValue!
-        let upperCaseA:UInt8 = Character("A").asciiValue!
-        let lowerCaseA:UInt8 = Character("a").asciiValue!
-        if charAscii >= upperCaseA {
-            return charAscii - upperCaseA
-        }
-        else {
-            return charAscii - lowerCaseA
-        }
-    }
-    
+     
     func doesString(_ inputString:String, rotateTo rotateToString:String) -> Bool {
         guard inputString.count == rotateToString.count else {
             return false
