@@ -28,6 +28,7 @@ class StringRotator {
                 commonStrings.append(inputString)
             }
         }
+        // return the list of common strings result
         return commonStrings
     }
     
