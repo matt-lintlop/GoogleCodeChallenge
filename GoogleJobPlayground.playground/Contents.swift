@@ -51,9 +51,8 @@ class StringRotator {
         guard string1.count == string2.count else {
             return false
         }
-        let stringLength = string1.count
         var firstCharRotateCount:Int8?
-        for index in 0..<stringLength {
+        for index in 0..<string1.count {
             let inputStringChar:Int8 = string1.utf8CString[index]
             let rotateStringChar:Int8 = string2.utf8CString[index]
             var charRotateCount:Int8 = rotateStringChar - inputStringChar
