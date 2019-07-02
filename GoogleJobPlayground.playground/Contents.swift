@@ -16,7 +16,7 @@ class StringRotator {
 
         for index in 1..<inputStrings.count {
             let inputString = inputStrings[index]
-            if doesString(firstString, rotateTo:inputString) {
+            if canRotateString(firstString, toString:inputString) {
                 commonStrings.append(inputString)
             }
         }
@@ -44,8 +44,8 @@ class StringRotator {
         }
         return resultStrings
     }
-     
-    func doesString(_ inputString:String, rotateTo rotateToString:String) -> Bool {
+    
+    func canRotateString(_ inputString:String, toString rotateToString:String) -> Bool {
         guard inputString.count == rotateToString.count else {
             return false
         }
