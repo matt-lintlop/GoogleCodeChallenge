@@ -23,6 +23,8 @@ class StringRotator {
         return commonStrings
     }
     
+    // Find all of the common rotated strings in a list of input strings .
+    // Returns an array of an array of common strings.
     func findAllCommonRotatedStrings(withStrings inputStrings:[String]) -> [[String]]? {
         var resultStrings:[[String]]?
         var remainingStrings:[String]? = inputStrings
@@ -46,7 +48,9 @@ class StringRotator {
         return resultStrings
     }
     
-    // Determine if string #1 can be rotated to strimg #2
+    // Determine if string #1 can be rotated to string #2 by a constant rotation value
+    // ex: (+) rotation value 1 = 'a'->'b'
+    // ex: (-) rotation value -1 = 'b' ->'a'
     func canRotateString(_ string1:String, toString string2:String) -> Bool {
         guard string1.count == string2.count else {
             return false
