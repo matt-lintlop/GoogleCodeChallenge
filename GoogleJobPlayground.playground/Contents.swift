@@ -26,7 +26,7 @@ class StringRotator {
     func findAllCommonRotatedStrings(withStrings inputStrings:[String]) -> [[String]]? {
         var resultStrings:[[String]]?
         var remainingStrings:[String]? = inputStrings
-        while (remainingStrings != nil) && remainingStrings!.count >= 1 {
+        while (remainingStrings!.count >= 1) {
             if let commonRotatedStrings = findCommonRotatedStrings(withStrings: remainingStrings!) {
                 if commonRotatedStrings.count >= 2 {
                     if resultStrings == nil {
