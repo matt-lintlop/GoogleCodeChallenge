@@ -9,13 +9,21 @@ class StringRotator {
     // Returns an array of common strings.
     func findFirstCommonRotatedStrings(withStrings inputStrings:[String]) -> [String]? {
         guard inputStrings.count >= 2 else {
+            // there are < 2 input strings so just return the input strings
             return inputStrings
         }
+        
+        // get the first input string
         let firstString = inputStrings.first!
+        
+        // initialize the common strings = first string
         var commonStrings:[String] = [firstString]
 
+        // loop thru all strings after the first input string
         for index in 1..<inputStrings.count {
             let inputString = inputStrings[index]
+            // if the first string can be rotated tp the current input string,
+            // add current input string to the list of common strings
             if canRotateString(firstString, toString:inputString) {
                 commonStrings.append(inputString)
             }
@@ -28,13 +36,17 @@ class StringRotator {
     func findAllCommonRotatedStrings(withStrings inputStrings:[String]) -> [[String]]? {
         var resultStrings:[[String]]?
         var remainingStrings:[String]? = inputStrings
+        
+        // keep looping while the are at least 2 strings remaining
         while (remainingStrings!.count >= 1) {
-            // find all common strings in the remaining strings
+            // find the first list of common strings from the remaining strings
             if let commonRotatedStrings = findFirstCommonRotatedStrings(withStrings: remainingStrings!) {
                 if commonRotatedStrings.count >= 2 {
                     if resultStrings == nil {
+                        // initialize the result strings
                         resultStrings = []
                     }
+                    // add the common rotated strings to the result strings
                     resultStrings?.append(commonRotatedStrings)
                 }
                 // remove the common strings from the remaining strings
@@ -45,6 +57,7 @@ class StringRotator {
                 }
             }
         }
+        // return the array of strings result with all common rotated strings
         return resultStrings
     }
     
