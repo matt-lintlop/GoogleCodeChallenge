@@ -41,7 +41,7 @@ class StringRotator {
         while (remainingStrings!.count >= 1) {
             // find the first list of common strings from the remaining strings
             if let commonRotatedStrings = findFirstCommonRotatedStrings(withStrings: remainingStrings!) {
-                if commonRotatedStrings.count >= 2 {
+                if commonRotatedStrings.count >= 1 {
                     if resultStrings == nil {
                         // initialize the result strings
                         resultStrings = []
