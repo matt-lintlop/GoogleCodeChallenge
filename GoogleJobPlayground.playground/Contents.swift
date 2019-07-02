@@ -27,6 +27,7 @@ class StringRotator {
         var resultStrings:[[String]]?
         var remainingStrings:[String]? = inputStrings
         while (remainingStrings!.count >= 1) {
+            // find all common strings in the remaining strings
             if let commonRotatedStrings = findCommonRotatedStrings(withStrings: remainingStrings!) {
                 if commonRotatedStrings.count >= 2 {
                     if resultStrings == nil {
@@ -34,6 +35,7 @@ class StringRotator {
                     }
                     resultStrings?.append(commonRotatedStrings)
                 }
+                // remove the common strings from the remaining strings
                 for commonRotatedString in commonRotatedStrings {
                     if let index = remainingStrings?.firstIndex(of: commonRotatedString) {
                         remainingStrings?.remove(at: index)
