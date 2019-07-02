@@ -16,14 +16,14 @@ class StringRotator {
         // get the first input string
         let firstString = inputStrings.first!
         
-        // initialize the common strings = first string
+        // initialize the common strings = 1st string
         var commonStrings:[String] = [firstString]
 
-        // loop thru all strings after the first input string
+        // loop thru all strings after the 1st input string
         for index in 1..<inputStrings.count {
             let inputString = inputStrings[index]
             
-            // if the first string can be rotated tp the current input string,
+            // if the 1st string can be rotated tp the current input string,
             // add current input string to the list of common strings
             if canRotateString(firstString, toString:inputString) {
                 commonStrings.append(inputString)
