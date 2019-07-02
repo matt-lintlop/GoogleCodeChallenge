@@ -60,7 +60,7 @@ class StringRotator {
             while charRotateCount > 25 {
                 charRotateCount -= 26
             }
-            if firstCharRotateCount == nil {
+            if index == 0 {
                  firstCharRotateCount = charRotateCount
             }
             else {
