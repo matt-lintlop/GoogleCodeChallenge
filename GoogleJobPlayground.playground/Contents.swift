@@ -22,12 +22,14 @@ class StringRotator {
         // loop thru all strings after the first input string
         for index in 1..<inputStrings.count {
             let inputString = inputStrings[index]
+            
             // if the first string can be rotated tp the current input string,
             // add current input string to the list of common strings
             if canRotateString(firstString, toString:inputString) {
                 commonStrings.append(inputString)
             }
         }
+        
         // return the list of common strings result
         return commonStrings
     }
@@ -40,16 +42,19 @@ class StringRotator {
         
         // keep looping while the are at least 2 strings remaining
         while (remainingStrings!.count >= 1) {
+            
             // find the first list of common strings from the remaining strings
             if let commonRotatedStrings = findFirstCommonRotatedStrings(withStrings: remainingStrings!) {
                 if commonRotatedStrings.count >= 1 {
                     if resultStrings == nil {
+                        
                         // initialize the result strings
                         resultStrings = []
                     }
                     // add the common rotated strings to the result strings
                     resultStrings?.append(commonRotatedStrings)
                 }
+                
                 // remove the common strings from the remaining strings
                 for commonRotatedString in commonRotatedStrings {
                     if let index = remainingStrings?.firstIndex(of: commonRotatedString) {
@@ -67,10 +72,19 @@ class StringRotator {
     // ex: (-) rotation value -1 = 'b' ->'a'
     func canRotateString(_ string1:String, toString string2:String) -> Bool {
         guard string1.count == string2.count else {
+            
+            // string1 & string2 are diffent length, so return false
             return false
         }
         var firstCharRotateCount:Int8?
+        
+        // loop thru all letters in the strings and compare each of
+        // the letter rotation values
         for index in 0..<string1.count {
+            
+            // get the rotation value (or # of characters a letter is rotated)
+            // for the current character with string1 & string2
+            // in the range 0 to 25
             var charRotateCount:Int8 = string2.utf8CString[index] - string1.utf8CString[index]
             while charRotateCount < 0 {
                 charRotateCount += 26
@@ -79,14 +93,19 @@ class StringRotator {
                 charRotateCount -= 26
             }
             if index == 0 {
+                // initialize the rotate count of the 1st letter of string1 & string2
                  firstCharRotateCount = charRotateCount
             }
             else {
+                // current letter rotation value is not the same as the 1st letter rotation value
+                // so string1 can not be rotated to string2
                 if charRotateCount != firstCharRotateCount {
                     return false
                 }
             }
         }
+        // all letters in string1 & string2 have the same rotation value
+        // so string1 can be rotated to string2
         return true
     }
 }
