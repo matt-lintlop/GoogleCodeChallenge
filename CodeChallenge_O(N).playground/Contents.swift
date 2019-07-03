@@ -1,3 +1,6 @@
+//  Created by Matt Lintlop on 7/1/19.
+//  Copyright © 2019 Matt Lintlop. All rights reserved.
+
 import Cocoa
 
 var str = "Hello, Google Job for Matt"
@@ -111,7 +114,6 @@ class StringRotator {
     }
 }
 
-
 // Do a timing test of this algorithm (with O(N) performance)
 let kAlgorithmTestIterationCount = 1000
 let stringRotator = StringRotator()
@@ -125,3 +127,4 @@ let algorithmEndTime = Date()
 let algorithmElapsed:TimeInterval = algorithmEndTime.timeIntervalSince(algorithmStartTime)
 let algorithmAverage:TimeInterval = algorithmElapsed/TimeInterval(kAlgorithmTestIterationCount)
 print("Algorithm O(N) performance: \(kAlgorithmTestIterationCount) iterations, average \(algorithmAverage) secs")
+
