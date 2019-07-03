@@ -111,13 +111,21 @@ class StringRotator {
     }
 }
 
+// Perform a timing test of the algorithm (in O n-2  time)
+let kTestIterationCount = 10000
 let stringRotator = StringRotator()
 let inputStrings = ["abbc","cdde","zaab","cat","thfg","ed","bzs"]
-print("Input Strings: \(inputStrings)")
-if let resultStrings = stringRotator.findAllCommonRotatedStrings(withStrings:inputStrings) {
-    print("Result has \(resultStrings.count) strings : \(resultStrings)")
+let startTime = Date().timeIntervalSinceNow
+for _ in 1...kTestIterationCount {
+    let _ = stringRotator.findAllCommonRotatedStrings(withStrings:inputStrings)
+//   print("Input Strings: \(inputStrings)")
+//    if let resultStrings = stringRotator.findAllCommonRotatedStrings(withStrings:inputStrings) {
+//        print("Result has \(resultStrings.count) strings : \(resultStrings)")
+//    }
+//    else {
+//        print("Result is nil")
+//    }
 }
-else {
-    print("Result is nil")
-}
+let elapsed = Date().timeIntervalSinceNow - startTime
+print("\(kTestIterationCount) iterations of algorithm in \(elapsed) seconds")
 
