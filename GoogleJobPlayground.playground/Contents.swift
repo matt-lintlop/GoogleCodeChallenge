@@ -113,7 +113,7 @@ class StringRotator {
 
 
 // Do a timing test of this algorithm (with O(N) performance)
-let kAlgorithmTestIterationCount = 1000
+let kAlgorithmTestIterationCount = 1
 let stringRotator = StringRotator()
 let testStartTime:Date = Date()
 let inputStrings = ["abbc","cdde","zaab","cat","thfg","ed","bzs"]
