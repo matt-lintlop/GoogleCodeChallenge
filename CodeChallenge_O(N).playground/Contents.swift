@@ -10,64 +10,39 @@ class StringRotator {
     
     // Find the first common rotated strings in a list of input strings .
     // Returns an array of common strings.
-    func findFirstCommonRotatedStrings(withStrings inputStrings:[String]) -> [String]? {
+    func findCommonRotatedStrings(withStrings inputStrings:[String]) -> [[String]]? {
         guard inputStrings.count >= 2 else {
             // there are < 2 input strings so just return the input strings
-            return inputStrings
+            return [inputStrings]
         }
         
-        // get the first input string
-        let firstString = inputStrings.first!
-        
-        // initialize the common strings = 1st string
-        var commonStrings:[String] = [firstString]
+        let reversedInputStrings = inputStrings.reversed()
+        var resultStrings:[[String]] = [[]]
 
-        // loop thru all strings after the 1st input string
-        for index in 1..<inputStrings.count {
-            let inputString = inputStrings[index]
+        for inputString1 in inputStrings {
             
-            // if the 1st string can be rotated tp the current input string,
-            // add current input string to the list of common strings
-            if canRotateString(firstString, toString:inputString) {
-                commonStrings.append(inputString)
+            var commonStrings:[String] = []
+            
+            for inputString2 in reversedInputStrings {
+                if inputString1 != inputString2 {
+                    // if the 1st string can be rotated tp the current input string,
+                    // add current input string to the list of common strings
+                    if canRotateString(inputString1, toString:inputString2) {
+                        print("Match: \(inputString1) & \(inputString2)")
+                        if (commonStrings.contains(inputString1) == false) {
+                            commonStrings.append(inputString1)
+                        }
+                        if (commonStrings.contains(inputString2) == false) {
+                            commonStrings.append(inputString2)
+                        }
+                    }
+                }
+             }
+            if (commonStrings.count > 2) {
+                resultStrings.append(commonStrings)
             }
         }
         
-        // return the list of common strings result
-        return commonStrings
-    }
-    
-    // Find all of the common rotated strings in a list of input strings .
-    // Returns an array of an array of common strings.
-    func findAllCommonRotatedStrings(withStrings inputStrings:[String]) -> [[String]]? {
-        var resultStrings:[[String]]?
-        var remainingStrings:[String]? = inputStrings
-        
-        // keep looping while the are at least the minuimum # of strings remaining
-        let kMinCommonStringsCount = 2
-        while (remainingStrings!.count >= kMinCommonStringsCount) {
-            
-            // find the first list of common strings from the remaining strings
-            if let commonRotatedStrings = findFirstCommonRotatedStrings(withStrings: remainingStrings!) {
-                if commonRotatedStrings.count >= kMinCommonStringsCount {
-                    if resultStrings == nil {
-                        
-                        // initialize the result strings
-                        resultStrings = []
-                    }
-                    // add the common rotated strings to the result strings
-                    resultStrings?.append(commonRotatedStrings)
-                }
-                
-                // remove the common strings from the remaining strings
-                for commonRotatedString in commonRotatedStrings {
-                    if let index = remainingStrings?.firstIndex(of: commonRotatedString) {
-                        remainingStrings?.remove(at: index)
-                    }
-                }
-            }
-        }
-        // return the array of strings result with all common rotated strings
         return resultStrings
     }
     
@@ -115,13 +90,14 @@ class StringRotator {
 }
 
 // Do a timing test of this algorithm (with O(N) performance)
-let kAlgorithmTestIterationCount = 1000
+let kAlgorithmTestIterationCount = 1
 let stringRotator = StringRotator()
 let testStartTime:Date = Date()
 let inputStrings = ["abbc","cdde","zaab","cat","thfg","ed","bzs"]
 let algorithmStartTime = Date()
 for _ in 1...kAlgorithmTestIterationCount {
-    let _ = stringRotator.findAllCommonRotatedStrings(withStrings:inputStrings)
+    let resultStrings = stringRotator.findCommonRotatedStrings(withStrings:inputStrings)
+    print("Result: \(resultStrings)")
 }
 let algorithmEndTime = Date()
 let algorithmElapsed:TimeInterval = algorithmEndTime.timeIntervalSince(algorithmStartTime)
