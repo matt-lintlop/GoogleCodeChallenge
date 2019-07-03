@@ -114,7 +114,7 @@ class StringRotator {
     }
 }
 
-// Perform a timing test of the algorithm (in O n-2  time)
+// Do a timing test of this algorithm (with O(N2) performance)
 let kAlgorithmTestIterationCount = 1000
 let stringRotator = StringRotator()
 let testStartTime:Date = Date()
@@ -126,5 +126,5 @@ for _ in 1...kAlgorithmTestIterationCount {
 let algorithmEndTime = Date()
 let algorithmElapsed:TimeInterval = algorithmEndTime.timeIntervalSince(algorithmStartTime)
 let algorithmAverage:TimeInterval = algorithmElapsed/TimeInterval(kAlgorithmTestIterationCount)
-print("N-Squared Algorithm Peformance: \(kAlgorithmTestIterationCount) iterations, average \(algorithmAverage) secs")
+print("Algorithm O(N2) performance: \(kAlgorithmTestIterationCount) iterations, average \(algorithmAverage) secs")
 
