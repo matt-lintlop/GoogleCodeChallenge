@@ -82,42 +82,13 @@ class StringRotator {
     // ex: (+) rotation value 1 = 'a'->'b'
     // ex: (-) rotation value -1 = 'b' ->'a'
     func canRotateString(_ string1:String, toString string2:String) -> Bool {
-        guard string1.count == string2.count else {
-            
-            // string1 & string2 are diffent length, so return false
+        guard let string1LetterRotationCounts = letterRotationCountsWithString(string1) else {
             return false
         }
-        var firstCharRotateCount:Int8?
-        
-        // loop thru all letters in the strings and compare each of
-        // the letter rotation values
-        for index in 0..<string1.count {
-            
-            // get the rotation value (or # of characters a letter is rotated)
-            // for the current character with string1 & string2
-            // in the range 0 to 25
-            var charRotateCount:Int8 = string2.utf8CString[index] - string1.utf8CString[index]
-            while charRotateCount < 0 {
-                charRotateCount += 26
-            }
-            while charRotateCount > 25 {
-                charRotateCount -= 26
-            }
-            if index == 0 {
-                // initialize the rotate count of the 1st letter of string1 & string2
-                firstCharRotateCount = charRotateCount
-            }
-            else {
-                // current letter rotation value is not the same as the 1st letter rotation value
-                // so string1 can not be rotated to string2
-                if charRotateCount != firstCharRotateCount {
-                    return false
-                }
-            }
+        guard let string2LetterRotationCounts = letterRotationCountsWithString(string2) else {
+            return false
         }
-        // all letters in string1 & string2 have the same rotation value
-        // so string1 can be rotated to string2
-        return true
+        return areStringLetterRotations(string1LetterRotationCounts, equalTo: string2LetterRotationCounts)
     }
     
     func getLetterRotationCount(fromLetter letter1:CChar, toLetter letter2:CChar) -> Int8 {
@@ -166,7 +137,15 @@ class StringRotator {
     }
     
     func areStringLetterRotations(_ stringLetterRotationCounts1:[Int8], equalTo stringLetterRotationCounts2:[Int8]) -> Bool {
-        return false
+        guard stringLetterRotationCounts1.count == stringLetterRotationCounts2.count else {
+            return false
+        }
+        for index in 0..<stringLetterRotationCounts1.count {
+            if stringLetterRotationCounts1[index] != stringLetterRotationCounts2[index] {
+                return false
+            }
+        }
+        return true
     }
  }
 
