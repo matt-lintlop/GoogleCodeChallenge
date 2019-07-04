@@ -44,6 +44,10 @@ class StringRotator {
     func findAllCommonRotatedStrings(withStrings inputStrings:[String]) -> [[String]]? {
         var resultStrings:[[String]]?
         var remainingStrings:[String]? = inputStrings
+        
+        // initialize the strings letter rotation value dictionary
+        // key = string
+        // value = array of integer of letter rotation values for each consecitive letter in the string
         self.stringsLetterRotationValuesDict = [:]
         
         // keep looping while the are at least the minuimum # of strings remaining
@@ -115,9 +119,22 @@ class StringRotator {
         // so string1 can be rotated to string2
         return true
     }
+    
+    func getLetterRotationValuesWithString(_ inputString:String) -> [Int]? {
+        guard inputString.count > 0 else { return nil }
+        let inputStringUTF8 = inputString.utf8CString
+        var stringLetterRotationValues:[Int]?
+        var previousLetter:CChar?
+        for index in 0..<inputString.count {
+            if index == 0 {
+                previousLetter = inputStringUTF8[0]
+            }
+        }
+        return stringLetterRotationValues
+    }
 }
 
-// Do a timing test of this algorithm (with O(N2) performance)
+// Do a timing test of this algorithm (with O(N) performance)
 let kAlgorithmTestIterationCount = 200
 let kPrintResult = false
 let stringRotator = StringRotator()
