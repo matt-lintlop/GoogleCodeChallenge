@@ -6,7 +6,7 @@ import Cocoa
 var str = "Hello, Google Job for Matt"
 let correctResultStrings = [["abbc","cdde","zaab"],["cat","bzs"]]
 
-class StringLetterRotatorOn2Time {
+class StringLetterRotatorTimeOn2 {
     
     // Find the first common rotated strings in a list of input strings .
     // Returns an array of common strings.
@@ -116,7 +116,7 @@ class StringLetterRotatorOn2Time {
 
 // Do a timing test of this algorithm (with O(N2) performance)
 let kAlgorithmTestIterationCount = 1000
-let letterRotator = StringLetterRotatorOn2Time()
+let letterRotator = StringLetterRotatorTimeOn2()
 let testStartTime:Date = Date()
 let inputStrings = ["abbc","cdde","zaab","cat","thfg","ed","bzs"]
 let algorithmStartTime = Date()
@@ -128,7 +128,7 @@ let algorithmEndTime = Date()
 let algorithmElapsed:TimeInterval = algorithmEndTime.timeIntervalSince(algorithmStartTime)
 let algorithmAverage:TimeInterval = algorithmElapsed/TimeInterval(kAlgorithmTestIterationCount)
 
-print("String Letter Rotator Algorithm with O(N) performance: \(kAlgorithmTestIterationCount) iterations, average \(algorithmAverage) secs")
+print("String Letter Rotator Algorithm with O(n2) performance: \(kAlgorithmTestIterationCount) iterations, average \(algorithmAverage) secs")
 if let resultStrings = resultStrings {
     print("Result: \(String(describing: resultStrings))")
 }

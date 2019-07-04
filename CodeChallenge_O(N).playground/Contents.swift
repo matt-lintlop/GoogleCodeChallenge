@@ -164,7 +164,7 @@ let algorithmEndTime = Date()
 let algorithmElapsed:TimeInterval = algorithmEndTime.timeIntervalSince(algorithmStartTime)
 let algorithmAverage:TimeInterval = algorithmElapsed/TimeInterval(kAlgorithmTestIterationCount)
 
-print("String Letter Rotator Algorithm with O(n2) performance: \(kAlgorithmTestIterationCount) iterations, average \(algorithmAverage) secs")
+print("String Letter Rotator Algorithm with O(n) performance: \(kAlgorithmTestIterationCount) iterations, average \(algorithmAverage) secs")
 if let resultStrings = resultStrings {
     print("Result: \(String(describing: resultStrings))")
 }
