@@ -8,7 +8,7 @@ let correctResultStrings = [["abbc","cdde","zaab"],["cat","bzs"]]
 
 class StringRotator {
     
-    var stringsLetterRotationValuesDict:[String:Int]?
+    var stringsLetterRotationCountsDict:[String:Int]?
     
     // Find the first common rotated strings in a list of input strings .
     // Returns an array of common strings.
@@ -48,7 +48,7 @@ class StringRotator {
         // initialize the strings letter rotation value dictionary
         // key = string
         // value = array of integer of letter rotation values for each consecitive letter in the string
-        self.stringsLetterRotationValuesDict = [:]
+        self.stringsLetterRotationCountsDict = [:]
         
         // keep looping while the are at least the minuimum # of strings remaining
         let kMinCommonStringsCount = 2
@@ -134,25 +134,26 @@ class StringRotator {
         return charRotateCount
     }
     
-    func getLetterRotationValuesWithString(_ inputString:String) -> [Int8]? {
+    func getLetterRotationCountsWithString(_ inputString:String) -> [Int8]? {
         guard inputString.count > 0 else { return nil }
         let inputStringUTF8 = inputString.utf8CString
-        var stringLetterRotationValues:[Int8] = []
+        var stringLetterRotationCounts:[Int8] = []
         var previousLetter:CChar?
         for index in 0..<inputString.count {
             if index == 0 {
                 previousLetter = inputStringUTF8[0]
-                stringLetterRotationValues.append(Int8(0))
+                stringLetterRotationCounts.append(Int8(0))
             }
             else {
                 let currentLetter = inputStringUTF8[index]
                 if let previousLetter = previousLetter {
-                    let letterRotationValue = getLetterRotationCount(fromLetter:previousLetter, toLetter:currentLetter)
-                    stringLetterRotationValues.append(Int8(letterRotationValue))
+                    let letterRotationCount = getLetterRotationCount(fromLetter:previousLetter, toLetter:currentLetter)
+                    stringLetterRotationCounts.append(Int8(letterRotationCount))
                }
             }
         }
-        return stringLetterRotationValues
+        print("inputString = \(inputString) letterRotationCounts = \(stringLetterRotationCounts)")
+        return stringLetterRotationCounts
     }
 }
 
