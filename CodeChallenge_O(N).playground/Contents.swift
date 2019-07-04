@@ -120,14 +120,36 @@ class StringRotator {
         return true
     }
     
-    func getLetterRotationValuesWithString(_ inputString:String) -> [Int]? {
+    func getLetterRotationCount(fromLetter letter1:CChar, toLetter letter2:CChar) -> Int8 {
+        // get the rotation count (or # of characters a letter is rotated)
+        // from letter1 -> letter2  in the range 0 to 25
+        // (ex: 'a' -> 'b' = 1)
+        var charRotateCount:Int8 = Int8(letter2 - letter1)
+        while charRotateCount < 0 {
+            charRotateCount += 26
+        }
+        while charRotateCount > 25 {
+            charRotateCount -= 26
+        }
+        return charRotateCount
+    }
+    
+    func getLetterRotationValuesWithString(_ inputString:String) -> [Int8]? {
         guard inputString.count > 0 else { return nil }
         let inputStringUTF8 = inputString.utf8CString
-        var stringLetterRotationValues:[Int]?
+        var stringLetterRotationValues:[Int8] = []
         var previousLetter:CChar?
         for index in 0..<inputString.count {
             if index == 0 {
                 previousLetter = inputStringUTF8[0]
+                stringLetterRotationValues.append(Int8(0))
+            }
+            else {
+                let currentLetter = inputStringUTF8[index]
+                if let previousLetter = previousLetter {
+                    let letterRotationValue = getLetterRotationCount(fromLetter:previousLetter, toLetter:currentLetter)
+                    stringLetterRotationValues.append(Int8(letterRotationValue))
+               }
             }
         }
         return stringLetterRotationValues
