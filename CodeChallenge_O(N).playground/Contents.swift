@@ -121,7 +121,6 @@ class StringRotator {
             for index in 0..<inputString.count {
                 if index == 0 {
                     previousLetter = inputStringUTF8[0]
-                    stringLetterRotationCounts.append(Int8(0))
                 }
                 else {
                     let currentLetter = inputStringUTF8[index]
@@ -129,6 +128,7 @@ class StringRotator {
                         let letterRotationCount = getLetterRotationCount(fromLetter:previousLetter, toLetter:currentLetter)
                         stringLetterRotationCounts.append(Int8(letterRotationCount))
                     }
+                    previousLetter = currentLetter
                 }
             }
             print("inputString = \(inputString) letterRotationCounts = \(stringLetterRotationCounts)")
