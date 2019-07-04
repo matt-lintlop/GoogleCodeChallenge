@@ -131,6 +131,7 @@ class StringRotator {
                     previousLetter = currentLetter
                 }
             }
+            stringsLetterRotationCountsDict![inputString] = stringLetterRotationCounts
             return stringLetterRotationCounts
         }
     }
