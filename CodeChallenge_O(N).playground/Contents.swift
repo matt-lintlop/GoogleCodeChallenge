@@ -167,12 +167,15 @@ class StringRotator {
  }
 
 // Do a timing test of this algorithm (with O(N) performance)
-let kAlgorithmTestIterationCount = 200
-let kPrintResult = false
+let kAlgorithmTestIterationCount = 1
+let kPrintResult = true
 let stringRotator = StringRotator()
 let testStartTime:Date = Date()
 let inputStrings = ["abbc","cdde","zaab","cat","thfg","ed","bzs"]
 let algorithmStartTime = Date()
+if kPrintResult {
+    print("Input: \(inputStrings)")
+}
 for index in 1...kAlgorithmTestIterationCount {
     if let result = stringRotator.findAllCommonRotatedStrings(withStrings:inputStrings) {
         if kPrintResult && (index == 1) {
