@@ -106,34 +106,34 @@ class StringLetterRotatorTimeOn {
     }
     
     func letterRotationCountsWithString(_ inputString:String) -> [Int8]? {
-        guard inputString.count > 0 else { return nil }
+        if let stringLetterRotationCounts = stringsLetterRotationCountsDict?[inputString] {
+            return stringLetterRotationCounts
+        }
+        guard inputString.count > 0 else {
+            return nil
+        }
 
         if stringsLetterRotationCountsDict == nil {
             stringsLetterRotationCountsDict = [:]
         }
-        if let stringLetterRotationCounts = stringsLetterRotationCountsDict?[inputString] {
-            return stringLetterRotationCounts
-        }
-        else {
-            let inputStringUTF8 = inputString.utf8CString
-            var stringLetterRotationCounts:[Int8] = []
-            var previousLetter:CChar?
-            for index in 0..<inputString.count {
-                if index == 0 {
-                    previousLetter = inputStringUTF8[0]
-                }
-                else {
-                    let currentLetter = inputStringUTF8[index]
-                    if let previousLetter = previousLetter {
-                        let letterRotationCount = getLetterRotationCount(fromLetter:previousLetter, toLetter:currentLetter)
-                        stringLetterRotationCounts.append(Int8(letterRotationCount))
-                    }
-                    previousLetter = currentLetter
-                }
+        let inputStringUTF8 = inputString.utf8CString
+        var stringLetterRotationCounts:[Int8] = []
+        var previousLetter:CChar?
+        for index in 0..<inputString.count {
+            if index == 0 {
+                previousLetter = inputStringUTF8[0]
             }
-            stringsLetterRotationCountsDict![inputString] = stringLetterRotationCounts
-            return stringLetterRotationCounts
+            else {
+                let currentLetter = inputStringUTF8[index]
+                if let previousLetter = previousLetter {
+                    let letterRotationCount = getLetterRotationCount(fromLetter:previousLetter, toLetter:currentLetter)
+                    stringLetterRotationCounts.append(Int8(letterRotationCount))
+                }
+                previousLetter = currentLetter
+            }
         }
+        stringsLetterRotationCountsDict![inputString] = stringLetterRotationCounts
+        return stringLetterRotationCounts
     }
     
     func areStringLetterRotations(_ stringLetterRotationCounts1:[Int8], equalTo stringLetterRotationCounts2:[Int8]) -> Bool {
