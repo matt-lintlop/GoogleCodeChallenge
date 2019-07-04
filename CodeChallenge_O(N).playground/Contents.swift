@@ -8,7 +8,7 @@ let correctResultStrings = [["abbc","cdde","zaab"],["cat","bzs"]]
 
 class StringRotator {
     
-    var stringsLetterRotationCountsDict:[String:Int]?
+    var stringsLetterRotationCountsDict:[String:[Int8]]?
     
     // Find the first common rotated strings in a list of input strings .
     // Returns an array of common strings.
@@ -134,28 +134,37 @@ class StringRotator {
         return charRotateCount
     }
     
-    func getLetterRotationCountsWithString(_ inputString:String) -> [Int8]? {
+    func letterRotationCountsWithString(_ inputString:String) -> [Int8]? {
         guard inputString.count > 0 else { return nil }
-        let inputStringUTF8 = inputString.utf8CString
-        var stringLetterRotationCounts:[Int8] = []
-        var previousLetter:CChar?
-        for index in 0..<inputString.count {
-            if index == 0 {
-                previousLetter = inputStringUTF8[0]
-                stringLetterRotationCounts.append(Int8(0))
-            }
-            else {
-                let currentLetter = inputStringUTF8[index]
-                if let previousLetter = previousLetter {
-                    let letterRotationCount = getLetterRotationCount(fromLetter:previousLetter, toLetter:currentLetter)
-                    stringLetterRotationCounts.append(Int8(letterRotationCount))
-               }
-            }
+
+        if stringsLetterRotationCountsDict == nil {
+            stringsLetterRotationCountsDict = [:]
         }
-        print("inputString = \(inputString) letterRotationCounts = \(stringLetterRotationCounts)")
-        return stringLetterRotationCounts
+        if let stringLetterRotationCounts = stringsLetterRotationCountsDict?[inputString] {
+            return stringLetterRotationCounts
+        }
+        else {
+            let inputStringUTF8 = inputString.utf8CString
+            var stringLetterRotationCounts:[Int8] = []
+            var previousLetter:CChar?
+            for index in 0..<inputString.count {
+                if index == 0 {
+                    previousLetter = inputStringUTF8[0]
+                    stringLetterRotationCounts.append(Int8(0))
+                }
+                else {
+                    let currentLetter = inputStringUTF8[index]
+                    if let previousLetter = previousLetter {
+                        let letterRotationCount = getLetterRotationCount(fromLetter:previousLetter, toLetter:currentLetter)
+                        stringLetterRotationCounts.append(Int8(letterRotationCount))
+                    }
+                }
+            }
+            print("inputString = \(inputString) letterRotationCounts = \(stringLetterRotationCounts)")
+            return stringLetterRotationCounts
+        }
     }
-}
+ }
 
 // Do a timing test of this algorithm (with O(N) performance)
 let kAlgorithmTestIterationCount = 200
