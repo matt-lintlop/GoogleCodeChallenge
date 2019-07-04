@@ -6,7 +6,7 @@ import Cocoa
 var str = "Hello, Google Job for Matt"
 let correctResultStrings = [["abbc","cdde","zaab"],["cat","bzs"]]
 
-class StringRotator {
+class StringLetterRotatorOnTime {
     
     var stringsLetterRotationCountsDict:[String:[Int8]]?
     
@@ -152,7 +152,7 @@ class StringRotator {
 // Do a timing test of this algorithm (with O(N) performance)
 let kAlgorithmTestIterationCount = 1000
 let kPrintResult = false
-let stringRotator = StringRotator()
+let stringLetterRotator = StringLetterRotatorOnTime()
 let testStartTime:Date = Date()
 let inputStrings = ["abbc","cdde","zaab","cat","thfg","ed","bzs"]
 let algorithmStartTime = Date()
@@ -160,7 +160,7 @@ if kPrintResult {
     print("Input: \(inputStrings)")
 }
 for index in 1...kAlgorithmTestIterationCount {
-    if let result = stringRotator.findAllCommonRotatedStrings(withStrings:inputStrings) {
+    if let result = stringLetterRotator.findAllCommonRotatedStrings(withStrings:inputStrings) {
         if kPrintResult && (index == 1) {
             print("Result: \(String(describing: result))")
         }
@@ -174,5 +174,5 @@ for index in 1...kAlgorithmTestIterationCount {
 let algorithmEndTime = Date()
 let algorithmElapsed:TimeInterval = algorithmEndTime.timeIntervalSince(algorithmStartTime)
 let algorithmAverage:TimeInterval = algorithmElapsed/TimeInterval(kAlgorithmTestIterationCount)
-print("Algorithm O(N) performance: \(kAlgorithmTestIterationCount) iterations, average \(algorithmAverage) secs")
+print("String Letter Rotator Algorithm with O(N) performance: \(kAlgorithmTestIterationCount) iterations, average \(algorithmAverage) secs")
 
