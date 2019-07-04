@@ -131,7 +131,6 @@ class StringRotator {
                     previousLetter = currentLetter
                 }
             }
-            print("inputString = \(inputString) letterRotationCounts = \(stringLetterRotationCounts)")
             return stringLetterRotationCounts
         }
     }
@@ -151,7 +150,7 @@ class StringRotator {
 
 // Do a timing test of this algorithm (with O(N) performance)
 let kAlgorithmTestIterationCount = 1
-let kPrintResult = true
+let kPrintResult = false
 let stringRotator = StringRotator()
 let testStartTime:Date = Date()
 let inputStrings = ["abbc","cdde","zaab","cat","thfg","ed","bzs"]
