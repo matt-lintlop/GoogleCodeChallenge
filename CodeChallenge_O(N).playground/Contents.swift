@@ -164,6 +164,10 @@ class StringRotator {
             return stringLetterRotationCounts
         }
     }
+    
+    func areStringLetterRotations(_ stringLetterRotationCounts1:[Int8], equalTo stringLetterRotationCounts2:[Int8]) -> Bool {
+        return false
+    }
  }
 
 // Do a timing test of this algorithm (with O(N) performance)
