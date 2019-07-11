@@ -3,46 +3,16 @@
 
 import Cocoa
 
-var str = "Hello, Google Job for Matt"
 let correctResultStrings = [["abbc","cdde","zaab"],["cat","bzs"]]
 
 class StringLetterRotatorTimeOn {
     
     var stringsLetterRotationCountsDict:[String:[Int8]]?
     
-    // Find the first common rotated strings in a list of input strings .
-    // Returns an array of common strings.
-    func findFirstCommonRotatedStrings(withStrings inputStrings:[String]) -> [String]? {
-        guard inputStrings.count >= 2 else {
-            // there are < 2 input strings so just return the input strings
-            return inputStrings
-        }
-        
-        // get the first input string
-        let firstString = inputStrings.first!
-        
-        // initialize the common strings = 1st string
-        var commonStrings:[String] = [firstString]
-        
-        // loop thru all strings after the 1st input string
-        for index in 1..<inputStrings.count {
-            let inputString = inputStrings[index]
-            
-            // if the 1st string can be rotated tp the current input string,
-            // add current input string to the list of common strings
-            if canRotateString(firstString, toString:inputString) {
-                commonStrings.append(inputString)
-            }
-        }
-        
-        // return the list of common strings result
-        return commonStrings
-    }
-    
     // Find all of the common rotated strings in a list of input strings .
     // Returns an array of an array of common strings.
     func findAllCommonRotatedStrings(withStrings inputStrings:[String]) -> [[String]]? {
-        var resultStrings:[[String]]?
+        var resultStrings:[[String]]? = []
         var remainingStrings:[String]? = inputStrings
         
         // initialize the strings letter rotation value dictionary
@@ -51,38 +21,41 @@ class StringLetterRotatorTimeOn {
         self.stringsLetterRotationCountsDict = [:]
         
         // keep looping while the are at least the minuimum # of strings remaining
-        let kMinCommonStringsCount = 2
-        var commonStrings:[String]?
-        while (remainingStrings!.count >= kMinCommonStringsCount) {
+        var commonRotatedStrings:[String]?
+        while (remainingStrings!.count >= 2) {
             
-            // get the first input string
-            let firstString = inputStrings.first!
+            // get the first remaining string
+            let firstString = remainingStrings!.first!
             
             // initialize the common strings = 1st string
-            commonStrings = [firstString]
+            commonRotatedStrings = [firstString]
             
             // loop thru all strings after the 1st input string
-            for index in 1..<inputStrings.count {
-                let inputString = inputStrings[index]
+            for index in 1..<remainingStrings!.count {
+                let inputString = remainingStrings![index]
                 
                 // if the 1st string can be rotated tp the current input string,
                 // add current input string to the list of common strings
                 if canRotateString(firstString, toString:inputString) {
-                    commonStrings!.append(inputString)
+                    commonRotatedStrings!.append(inputString)
                 }
             }
+            if (commonRotatedStrings!.count >= 2) {
+                // add the current common rotated strings to the results
+                resultStrings!.append(commonRotatedStrings!)
+             }
 
-            // find the first list of common strings from the remaining strings
-            if let commonRotatedStrings = findFirstCommonRotatedStrings(withStrings: remainingStrings!) {
- 
-                // remove the common strings from the remaining strings
-                for commonRotatedString in commonRotatedStrings {
+            // remove the common strings from the remaining strings
+            if (commonRotatedStrings!.count >= 1) {
+                for commonRotatedString in commonRotatedStrings! {
                     if let index = remainingStrings?.firstIndex(of: commonRotatedString) {
                         remainingStrings?.remove(at: index)
                     }
                 }
             }
+            commonRotatedStrings = nil
         }
+  
         // return the array of strings result with all common rotated strings
         return resultStrings
     }
@@ -223,13 +196,11 @@ class StringRotatorTimeOn2 {
         return resultStrings
     }
     
-    
+
     // Find all of the common rotated strings in a list of input strings .
     // Returns an array of an array of common strings.
     func findCommonRotatedStrings(withStrings inputStrings:[String]) -> [[String]]? {
         var resultStrings:[[String]]?
-        
-        
         
         var remainingStrings:[String]? = inputStrings
         
@@ -308,7 +279,7 @@ class StringRotatorTimeOn2 {
 // O(n2) Algorithm Timing Test:
 // Do a timing test of this algorithm (with O(n) time performance)
 //
-let kAlgorithmTestIterationCount = 1000
+let kAlgorithmTestIterationCount = 10
 let stringLetterRotator = StringLetterRotatorTimeOn()
 var testStartTime:Date = Date()
 let inputStrings = ["abbc","cdde","zaab","cat","thfg","ed","bzs"]
@@ -342,5 +313,5 @@ for _ in 1...kAlgorithmTestIterationCount {
 algorithmEndTime = Date()
 algorithmElapsed = algorithmEndTime.timeIntervalSince(algorithmStartTime)
 algorithmAverage = algorithmElapsed/TimeInterval(kAlgorithmTestIterationCount)
-print("Algorithm O(n2) performance: \(kAlgorithmTestIterationCount) iterations, average \(algorithmAverage) secs")
+print("Algorithm O(n) performance: \(kAlgorithmTestIterationCount) iterations, average \(algorithmAverage) secs")
 
